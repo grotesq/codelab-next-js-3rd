@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "cross-env next dev -p ${PORT-1234}",
     "build": "next build",
+    "export": "next export",
     "start": "next start -p ${PORT-80}"
   },
   "dependencies": {
+    "antd": "^4.5.1",
     "next": "9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1"
