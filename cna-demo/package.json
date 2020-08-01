@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antd": "^4.5.1",
+    "axios": "^0.19.2",
     "next": "9.5.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
