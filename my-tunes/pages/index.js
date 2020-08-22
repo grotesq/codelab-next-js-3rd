@@ -30,7 +30,7 @@ function Home(props) {
             if( !confirm( '정말 삭제하시겠습니까?' ) ) {
               return false;
             }
-            axios.delete( 'http://127.0.0.1:3000/api/albums/' + value )
+            axios.delete( process.env.API_HOST + '/api/albums/' + value )
               .then( response => {
                 load();
               } )
@@ -44,7 +44,7 @@ function Home(props) {
   ]
   const [ albums, setAlbums ] = React.useState( props.albums );
   const load = async () => {
-    const albums = await axios.get( 'http://127.0.0.1:3000/api/albums' )
+    const albums = await axios.get( process.env.API_HOST + '/api/albums' )
     setAlbums( albums.data );
   }
   return (
@@ -52,7 +52,7 @@ function Home(props) {
       <Table dataSource={ albums } columns={ columns } rowKey={ 'id' }/>
 
       <Form onFinish={ values => {
-        axios.post( 'http://127.0.0.1:3000/api/albums', values )
+        axios.post( process.env.API_HOST + '/api/albums', values )
           .then( response => {
             // response.data -> { id: n, artist: '', title: '' }
             /*
@@ -88,7 +88,7 @@ function Home(props) {
 }
 
 Home.getInitialProps = async () => {
-  const albums = await axios.get( 'http://127.0.0.1:3000/api/albums' );
+  const albums = await axios.get( process.env.API_HOST + '/api/albums' );
   return {
     albums: albums.data
   }
