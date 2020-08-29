@@ -1,11 +1,14 @@
 import axios from "axios";
 import Cookies from 'universal-cookie';
 import SignIn from "../components/SignIn";
+import MainLayout from "../components/MainLayout";
 
 export default function( Component ) {
     function WithAuth(props) {
         if( props.error ) {
-            return <SignIn {...props}/>
+            return <MainLayout {...props}>
+                <SignIn {...props}/>
+            </MainLayout>
         }
         return (
             <Component {...props}/>
@@ -13,28 +16,14 @@ export default function( Component ) {
     }
 
     WithAuth.getInitialProps = async context => {
-        let props = {};
-        const cookies = context.req ? new Cookies(context.req.headers.cookie) : new Cookies();
-        const token = cookies.get( 'mini-community-token' );
-        if( !token ) {
+        if( !context.auth ) {
             return {
-                error: '토큰이 필요합니다.',
+                error: '인증이 필요합니다.',
             }
         }
-        try {
-            const response = await axios.get( 'http://127.0.0.1:3333/api/me', {
-                headers: {
-                    token,
-                }
-            } );
-            props.auth = response.data;
-        }
-        catch( error ) {
-            return {
-                error: '유효한 토큰이 필요합니다.',
-            }
-        }
-        
+        let props = {
+            auth: context.auth,
+        };
         if( Component.getInitialProps ) {
             props = {
                 ...props,

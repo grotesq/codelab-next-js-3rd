@@ -1,8 +1,11 @@
 import SignInComponent from '../components/SignIn';
+import MainLayout from '../components/MainLayout';
 
 function SignIn(props) {
     return (
-        <SignInComponent {...props}/>
+        <MainLayout {...props}>
+            <SignInComponent {...props}/>
+        </MainLayout>
     )
 }
 
