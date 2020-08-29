@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p ${PORT-3005}",
     "build": "next build",
     "start": "next start"
   },
@@ -21,6 +21,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "sqlite3": "^5.0.0",
+    "universal-cookie": "^4.0.3",
     "uuid": "^8.3.0"
   }
 }
